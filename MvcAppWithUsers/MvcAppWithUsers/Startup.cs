@@ -45,6 +45,11 @@ namespace MvcAppWithUsers
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
+
+                options.AddPolicy("IsAdmin", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("IsAdminOrBackOfficeUser", policy => policy.RequireRole("Admin", "BackOfficeUser"));
+                options.AddPolicy("IsBackOfficeUser", policy => policy.RequireRole("BackOfficeUser"));
+                options.AddPolicy("IsFrontOfficeUser", policy => policy.RequireRole("FrontOfficeUser"));
             });
         }
 
